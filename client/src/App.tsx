@@ -1,4 +1,5 @@
-import React, {useEffect, useState} from 'react'
+import * as React from 'react'
+import {useEffect, useState} from 'react'
 
 function App() {
 
@@ -16,7 +17,7 @@ function App() {
   return(
     <div>
     {(typeof backendData.users === 'undefined') ? (
-      <p>Loading...</p>
+      <p>Loading....</p>
     ):(
       backendData.users.map((user,i)=>(
         <p key={i}>{user}</p>
