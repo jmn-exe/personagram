@@ -8,6 +8,7 @@
     position: relative;
 }
 h1{
+    padding-top:15px;
     text-align: center;
 }
 .grid-center{
@@ -64,6 +65,15 @@ h1{
     padding:20px;
     background-color: rgb(235, 235, 235);
     width: 100%;
+}
+
+.post-back-btn{
+    font-size: 20px;
+    position:absolute;
+    transform: translateX(-150%);
+}
+.post-back-btn:hover{
+    cursor: pointer;
 }
 
 .post-date{
