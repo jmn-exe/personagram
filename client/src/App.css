@@ -1,4 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
+::-webkit-scrollbar {
+    width: 10px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+    background: #dbdbdb;
+}
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #b3b3b3;
+    border-radius: 5px;
+}
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+body{
+    scrollbar-gutter: stable both-edges;
+}
 
 *{
     margin:0;
@@ -8,8 +27,9 @@
     position: relative;
 }
 h1{
-    padding-top:15px;
-    text-align: center;
+    padding:15px;
+    text-align: left;
+    padding-left: 30px;
 }
 .grid-center{
     display: flex;
@@ -37,7 +57,7 @@ h1{
     left:0;
     
 }
-.dim-back{
+.post-container{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,13 +77,14 @@ h1{
     width: 80vw;
     display: flex;
     flex-direction: row;
+    background-color: rgb(235, 235, 235);
     border: 1px solid rgb(219, 219, 219);
 }
 
-.desc-view{
+.desc-view, .desc-edit{
     font-family: 'PT Sans', sans-serif;
     padding:20px;
-    background-color: rgb(235, 235, 235);
+    
     width: 100%;
 }
 
@@ -71,9 +92,14 @@ h1{
     font-size: 20px;
     position:absolute;
     transform: translateX(-150%);
+    text-decoration: none;
+    color:rgb(20, 20, 20);
 }
 .post-back-btn:hover{
     cursor: pointer;
+}
+.tag-select > input:checked{
+    font-size: large;
 }
 
 .post-date{
@@ -97,11 +123,23 @@ h1{
     flex-direction: row;
     margin-bottom: 5px;
 }
-.post-tags div{
+.t-diary,.t-fun,.t-journal{
     font-size: 12px;
     margin-right: 10px;
-    background-color: rgb(40, 38, 177);
     color:rgb(255, 255, 255);
     padding:3px 6px;
     border-radius: 5px;
+}
+.pv{
+    display: none !important;
+}
+
+.t-diary{
+    background-color: brown;
+}
+.t-journal{
+    background-color: rgb(31, 122, 66);
+}
+.t-fun{
+    background-color: rgb(61, 42, 165);
 }
