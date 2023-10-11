@@ -27,9 +27,10 @@ body{
     position: relative;
 }
 h1{
-    padding:15px;
-    text-align: left;
-    padding-left: 30px;
+    padding-top:15px;
+    padding-bottom: 20px;
+    width: 99vw;
+    text-align: center;
 }
 .grid-center{
     display: flex;
@@ -82,10 +83,13 @@ h1{
 }
 
 .desc-view, .desc-edit{
-    font-family: 'PT Sans', sans-serif;
+    display:flex;
+    flex-direction: column;
     padding:20px;
-    
     width: 100%;
+}
+.desc-view > *, .desc-edit > *{
+    font-family: 'PT Sans', sans-serif !important;
 }
 
 .post-back-btn{
@@ -98,8 +102,17 @@ h1{
 .post-back-btn:hover{
     cursor: pointer;
 }
-.tag-select > input:checked{
-    font-size: large;
+.tags-select input{
+    vertical-align: middle;
+    margin-left: 5px;
+}
+.tags-select{
+    margin-bottom: 20px;
+}
+textarea{
+    height:80%;
+    width: 100%;
+    resize:none;
 }
 
 .post-date{
@@ -113,9 +126,26 @@ h1{
     border-bottom: 1px solid rgb(197, 197, 197);
 }
 
-.post-edit-btn{
-    margin-top: 15px;
+button{
     text-align: center;
+    border: 1px solid rgb(177, 177, 177);
+    border-radius: 5px;
+    background: rgb(211, 211, 211);
+    font-size: 16px;
+    padding: 10px;
+}
+.save-edit, .cancel-edit{
+    margin-top: 15px;
+}
+.save-edit{
+    background-color: rgb(32, 173, 32);
+    color:white;
+}
+.edit-confirm{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
 }
 
 .post-tags{
@@ -124,7 +154,7 @@ h1{
     margin-bottom: 5px;
 }
 .t-diary,.t-fun,.t-journal{
-    font-size: 12px;
+    font-size: 14px;
     margin-right: 10px;
     color:rgb(255, 255, 255);
     padding:3px 6px;
