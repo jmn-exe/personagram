@@ -6,6 +6,7 @@ import postData from './data/data.json'
 
 import Homepage from './pages/Homepage'
 import PostView from './pages/PostView'
+import Upload from './pages/Upload'
 
 function Post(props){
   return(
@@ -60,8 +61,9 @@ export default function App(){
     <div className='main-container'>
       <h1>PersonaGram</h1>
       <Routes>
-        <Route path='/' element={<Homepage/>}/>
+        <Route path='/' element={<Homepage/>} />
         <Route path='/post/:id' element={<PostView/>} />
+        <Route path='/upload' element={<Upload/>} />
       </Routes>
     </div>
   {/*

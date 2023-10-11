@@ -5,13 +5,15 @@ import { useParams } from 'react-router-dom'
 import '../App.css'
 import postData from '../data/data.json'
 
+import fs from 'fs';
+
 const postTags = [
     {tag:'Diary',class:'t-diary'},
     {tag:'Journal',class:'t-journal'},
     {tag:'Fun',class:'t-fun'},
 ];
 
-console.log(JSON.stringify(postData));
+//console.log(JSON.stringify(postData));
 //let {id} = useParams();
 //console.log(id);
 //console.log(typeof(id));
@@ -57,6 +59,7 @@ function ShowPost(props){
                             className='save-edit' 
                             onClick={()=> {
                                 savePost(post.id,sPostNote,sPostTag);
+                                
                                 setIsEdit(0);
                             }}>
                             Save

@@ -43,6 +43,16 @@ h1{
     flex-wrap: wrap;
     max-width: 900px;
 }
+.upload-btn{
+    position:fixed;
+    left:90%;
+    top:85%;
+    background-color: rgb(31, 29, 119);
+    color: white;
+}
+button:hover{
+    cursor: pointer;
+}
 .img-instance, .img-instance img{
     width:300px;
     height:300px;

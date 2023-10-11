@@ -9,6 +9,7 @@ require("./App.css");
 var data_json_1 = __importDefault(require("./data/data.json"));
 var Homepage_1 = __importDefault(require("./pages/Homepage"));
 var PostView_1 = __importDefault(require("./pages/PostView"));
+var Upload_1 = __importDefault(require("./pages/Upload"));
 function Post(props) {
     return (react_1.default.createElement("div", { className: 'img-instance', key: props.postID, onClick: function () { return OpenPost(props); } },
         react_1.default.createElement("img", { src: props.url, alt: props.alt })));
@@ -40,6 +41,7 @@ function App() {
             react_1.default.createElement("h1", null, "PersonaGram"),
             react_1.default.createElement(react_router_dom_1.Routes, null,
                 react_1.default.createElement(react_router_dom_1.Route, { path: '/', element: react_1.default.createElement(Homepage_1.default, null) }),
-                react_1.default.createElement(react_router_dom_1.Route, { path: '/post/:id', element: react_1.default.createElement(PostView_1.default, null) })))));
+                react_1.default.createElement(react_router_dom_1.Route, { path: '/post/:id', element: react_1.default.createElement(PostView_1.default, null) }),
+                react_1.default.createElement(react_router_dom_1.Route, { path: '/upload', element: react_1.default.createElement(Upload_1.default, null) })))));
 }
 exports.default = App;

@@ -31,6 +31,7 @@ export default function Homepage(){
         {postData.map((data)=> <Post postID={data.id} url={data.image.url}
         alt={data.image.alt}/>)}
         </div>
+        <Link to='/upload'><button className='upload-btn'>Upload</button></Link>
     </div>
     )
 }

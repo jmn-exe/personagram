@@ -23,7 +23,7 @@ var postTags = [
     { tag: 'Journal', class: 't-journal' },
     { tag: 'Fun', class: 't-fun' },
 ];
-console.log(JSON.stringify(data_json_1.default));
+//console.log(JSON.stringify(postData));
 //let {id} = useParams();
 //console.log(id);
 //console.log(typeof(id));
