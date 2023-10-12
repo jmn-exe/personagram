@@ -29,6 +29,7 @@ function ShowPost(_a) {
     var _b = (0, react_2.useState)(initNote), sPostNote = _b[0], setPostNote = _b[1];
     var _c = (0, react_2.useState)(initTag), sPostTag = _c[0], setPostTag = _c[1];
     var _d = (0, react_2.useState)(0), isEdit = _d[0], setIsEdit = _d[1];
+    var _e = (0, react_2.useState)(datemodified), date = _e[0], setDate = _e[1];
     console.log("tag:");
     console.log(sPostTag);
     return (react_1.default.createElement("div", { className: 'post-view' },
@@ -41,7 +42,7 @@ function ShowPost(_a) {
                 react_1.default.createElement("div", { className: 'desc-view ' + (isEdit ? 'pv' : '') },
                     react_1.default.createElement("div", { className: 'post-date' },
                         "Last edited - ",
-                        getDate(datemodified)),
+                        getDate(date)),
                     react_1.default.createElement("div", { className: 'post-tags' }, sPostTag.map(function (t) { return (react_1.default.createElement(Tag, { tag: t })); })),
                     react_1.default.createElement("div", { className: 'post-desc' }, sPostNote),
                     react_1.default.createElement("button", { className: 'post-edit-btn', onClick: function () { return setIsEdit(1); } }, "Edit")),
@@ -51,6 +52,7 @@ function ShowPost(_a) {
                     react_1.default.createElement("textarea", { className: 'post-desc', value: sPostNote, onChange: function (t) { return setPostNote(t.target.value); } }),
                     react_1.default.createElement("div", { className: 'edit-confirm' },
                         react_1.default.createElement("button", { className: 'save-edit', onClick: function () {
+                                setDate(Date.now());
                                 savePost(id, sPostNote, sPostTag);
                                 setIsEdit(0);
                             } }, "Save"),
@@ -64,6 +66,14 @@ function ShowPost(_a) {
                             } }, "Cancel")))))));
 }
 function savePost(id, note, tags) {
+    var body = { id: id, note: note, tags: tags };
+    fetch('/update', {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    });
     /*
     let postIndex = postData.findIndex(p => p.id === id)
     postData[postIndex].note = note;

@@ -131,6 +131,7 @@ button:hover{
     margin-bottom: 20px;
 }
 textarea{
+    padding: 10px;
     height:80%;
     width: 100%;
     resize:none;
@@ -225,4 +226,10 @@ button{
 }
 .upload-tags{
     padding:10px 0px;
+}
+
+.sort-filter{
+    display: flex;
+    justify-content:end;
+    padding:5px 20px;
 }

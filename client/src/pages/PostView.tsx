@@ -19,6 +19,7 @@ function ShowPost({id,img,note,datemodified,taglist}){
     const [sPostNote,setPostNote] = useState(initNote);
     const [sPostTag,setPostTag] = useState(initTag);
     const [isEdit,setIsEdit] = useState(0);
+    const [date,setDate] = useState(datemodified);
     console.log("tag:");
     console.log(sPostTag);
     return(
@@ -30,7 +31,7 @@ function ShowPost({id,img,note,datemodified,taglist}){
                     <img src={img.url} alt={img.alt} />
                 </div>
                 <div className={'desc-view '+ (isEdit ? 'pv':'')}>
-                    <div className='post-date'>Last edited - {getDate(datemodified)}</div>
+                    <div className='post-date'>Last edited - {getDate(date)}</div>
                     <div className='post-tags'>
                         {sPostTag.map(t => (
                             <Tag tag={t}/>
@@ -54,6 +55,7 @@ function ShowPost({id,img,note,datemodified,taglist}){
                         <button 
                         className='save-edit' 
                         onClick={()=> {
+                            setDate(Date.now());
                             savePost(id,sPostNote,sPostTag);
                             setIsEdit(0);
                         }}>
@@ -77,6 +79,14 @@ function ShowPost({id,img,note,datemodified,taglist}){
 }
 
 function savePost(id,note,tags){
+    let body = {id,note,tags}
+    fetch('/update',{
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    });
     /*
     let postIndex = postData.findIndex(p => p.id === id)
     postData[postIndex].note = note;
