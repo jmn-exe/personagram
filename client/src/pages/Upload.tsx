@@ -2,10 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { Link, Navigate, redirect, useNavigate } from 'react-router-dom'
 import '../App.css'
-import postData from '../data/data.json'
 import postTags from '../data/tags.json'
-
-
 
 export default function Upload(){
     const [imgSrc,setImgSrc]:any = useState('');
@@ -40,7 +37,7 @@ export default function Upload(){
 }
 
 function validateForm(e,imgFile,tagList,pNote){
-    console.log(tagList);
+
     e.preventDefault();
     if(imgFile === ''){
         window.alert('Please upload an image!');

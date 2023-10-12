@@ -85,7 +85,6 @@ app.get("/post/:id",(req,res)=>{
 })
 
 app.post('/update',(req,res)=>{
-    console.log(req.body.tags);
     fs.readFile(filePath,(err,data)=>{
         if(err) throw err;
         let postData = JSON.parse(data);

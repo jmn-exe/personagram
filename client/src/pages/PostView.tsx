@@ -22,8 +22,6 @@ function ShowPost({id,img,note,datemodified,taglist}){
     const [sPostTag,setPostTag] = useState(initTag);
     const [isEdit,setIsEdit] = useState(0);
     const [date,setDate] = useState(datemodified);
-    console.log("tag:");
-    console.log(sPostTag);
     return(
     <div className='post-view'>
         <div className='post-container'>
@@ -131,8 +129,6 @@ function Tag(props){
 }
 
 function TagSelector(props){
-    console.log(props.tags);
-    console.log(props.tags.includes('Diary'));
     let tagList = postTags.map(t => {
         return(
             <label key={t.tag} className={t.class+" .tag-select"}>{t.tag}
@@ -192,7 +188,6 @@ export default function PostView(){
             setSelectedPost(data);
         })
     },[]);
-    console.log(sp);
     return(
         <>
         {(sp.id === -1) ? 

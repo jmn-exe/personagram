@@ -1,1 +1,5 @@
-[{"tag":"Diary","class":"t-diary"},{"tag":"Journal","class":"t-journal"},{"tag":"Fun","class":"t-fun"}]
+[
+{"tag":"Diary","class":"t-diary"},
+{"tag":"Journal","class":"t-journal"},
+{"tag":"Fun","class":"t-fun"}
+]

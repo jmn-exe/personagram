@@ -44,7 +44,6 @@ function Upload() {
 }
 exports.default = Upload;
 function validateForm(e, imgFile, tagList, pNote) {
-    console.log(tagList);
     e.preventDefault();
     if (imgFile === '') {
         window.alert('Please upload an image!');

@@ -2,7 +2,6 @@ import React from 'react'
 import {Route, Routes} from 'react-router-dom'
 import {useEffect, useState} from 'react'
 import './App.css'
-import postData from './data/data.json'
 
 import Homepage from './pages/Homepage'
 import PostView from './pages/PostView'

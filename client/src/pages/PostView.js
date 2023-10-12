@@ -32,8 +32,6 @@ function ShowPost(_a) {
     var _e = (0, react_2.useState)(initTag), sPostTag = _e[0], setPostTag = _e[1];
     var _f = (0, react_2.useState)(0), isEdit = _f[0], setIsEdit = _f[1];
     var _g = (0, react_2.useState)(datemodified), date = _g[0], setDate = _g[1];
-    console.log("tag:");
-    console.log(sPostTag);
     return (react_1.default.createElement("div", { className: 'post-view' },
         react_1.default.createElement("div", { className: 'post-container' },
             react_1.default.createElement("div", { className: 'post-box' },
@@ -112,8 +110,6 @@ function Tag(props) {
     return (react_1.default.createElement("div", { key: tagName, className: tagClass }, tagName));
 }
 function TagSelector(props) {
-    console.log(props.tags);
-    console.log(props.tags.includes('Diary'));
     var tagList = postTags.map(function (t) {
         return (react_1.default.createElement("label", { key: t.tag, className: t.class + " .tag-select" },
             t.tag,
@@ -147,7 +143,6 @@ function PostView() {
             setSelectedPost(data);
         });
     }, []);
-    console.log(sp);
     return (react_1.default.createElement(react_1.default.Fragment, null, (sp.id === -1) ?
         (react_1.default.createElement("p", null, "Loading..."))
         :

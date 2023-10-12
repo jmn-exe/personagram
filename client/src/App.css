@@ -249,3 +249,7 @@ button{
     justify-content:end;
     padding:5px 20px;
 }
+
+.sort-selected{
+    background-color: rgb(79, 236, 171);
+}
