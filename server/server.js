@@ -35,15 +35,31 @@ const upload = multer({
 
 app.post('/uploadpost', upload.single('image'), (req, res) =>{
     res.send(req.file);
+    let lastSlash = req.file.path.lastIndexOf('\\');
+    let imgPath = '/data/images'+req.file.path.substring(lastSlash);
     fs.readFile(filePath,(err,data)=>{
         if (err) throw err;
         let postData = JSON.parse(data);
-        let latestID = postData.splice(-1)[0].id + 1;
+        console.log(postData);
+        let lastPost = postData.slice(-1)
+        let latestID = lastPost[0].id + 1;
+        console.log(postData);
         console.log(latestID);
         let tempData = {
             id: latestID,
-            note: req.body.note
+            note: req.body.notes,
+            image:{
+                alt:'',
+                url:imgPath
+            },
+            datemodified: Date.now(),
+            tag: req.body.tag.split(',')
         }
+        postData.push(tempData);
+        fs.writeFile(filePath,JSON.stringify(postData),(err)=>{
+            if(err) throw err;
+            res.end();
+        })
     })
 }, (error,req,res,next)=>{
     res.status(400).send({error: error.message});

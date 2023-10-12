@@ -18,7 +18,7 @@ var react_router_dom_1 = require("react-router-dom");
 require("../App.css");
 //import postData from '../data/data.json'
 function Post(props) {
-    return (react_1.default.createElement("div", { className: 'img-instance', key: props.postID },
+    return (react_1.default.createElement("div", { className: 'img-instance' },
         react_1.default.createElement(react_router_dom_1.Link, { to: '/post/' + props.postID },
             react_1.default.createElement("img", { src: props.url, alt: props.alt }))));
 }
@@ -53,7 +53,7 @@ function Homepage() {
             react_1.default.createElement("button", { onClick: function () { return sortLatestModified(postData, setPostData); } }, "Sort by Latest Modified")),
         react_1.default.createElement("div", { className: "grid-center" }, (postData[0].id === -1) ? (react_1.default.createElement("p", null, "Loading...")) :
             (react_1.default.createElement(react_1.default.Fragment, null,
-                react_1.default.createElement("div", { className: "grid-container" }, postData.map(function (data) { return react_1.default.createElement(Post, { postID: data.id, url: data.image.url, alt: data.image.alt }); })),
+                react_1.default.createElement("div", { className: "grid-container" }, postData.map(function (data) { return react_1.default.createElement(Post, { postID: data.id, url: data.image.url, alt: data.image.alt, key: data.id }); })),
                 react_1.default.createElement(react_router_dom_1.Link, { to: '/upload' },
                     react_1.default.createElement("button", { className: 'upload-btn' }, "Upload")))))));
 }

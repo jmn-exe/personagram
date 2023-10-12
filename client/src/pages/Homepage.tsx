@@ -6,7 +6,7 @@ import '../App.css'
 
 function Post(props){
     return(
-      <div className='img-instance' key={props.postID}>
+      <div className='img-instance'>
         <Link to={'/post/'+props.postID}>
             <img src={props.url} alt={props.alt}></img>
         </Link>
@@ -66,7 +66,8 @@ export default function Homepage(){
         <>
         <div className="grid-container">
         {postData.map((data)=> <Post postID={data.id} url={data.image.url}
-        alt={data.image.alt}/>)}
+        alt={data.image.alt}
+        key={data.id}/>)}
         </div>
         <Link to='/upload'><button className='upload-btn'>Upload</button></Link>
         </>
