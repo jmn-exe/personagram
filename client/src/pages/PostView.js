@@ -58,10 +58,6 @@ function ShowPost(_a) {
                                 savePost(id, tempNote, tempTag);
                                 setPostNote(tempNote);
                                 setPostTag(tempTag);
-                                console.log(sPostNote);
-                                console.log(sPostTag);
-                                console.log(tempNote);
-                                console.log(tempTag);
                                 setIsEdit(0);
                             } }, "Save"),
                         react_1.default.createElement("button", { className: 'cancel-edit', onClick: function () {
@@ -71,7 +67,8 @@ function ShowPost(_a) {
                                     setTempTag(sPostTag);
                                     setIsEdit(0);
                                 }
-                            } }, "Cancel")))))));
+                            } }, "Cancel"))),
+                react_1.default.createElement("button", { className: 'post-delete-btn', onClick: function () { return deletePost(id); } }, "Delete")))));
 }
 function savePost(id, note, tags) {
     var body = { id: id, note: note, tags: tags };
@@ -82,6 +79,22 @@ function savePost(id, note, tags) {
             "Content-type": "application/json; charset=UTF-8"
         }
     });
+}
+function deletePost(id) {
+    var confirmation = window.confirm("Are you sure you want to delete this post?");
+    if (confirmation) {
+        //delete
+        fetch('/deletepost', {
+            method: 'POST',
+            body: JSON.stringify({ "id": id }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }).then(function (res) { return res.json(); }).then(function (data) {
+            window.alert(data);
+            window.location.href = "/";
+        });
+    }
 }
 function getDate(date) {
     if (typeof (date) == "string") {

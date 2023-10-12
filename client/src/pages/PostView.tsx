@@ -61,10 +61,6 @@ function ShowPost({id,img,note,datemodified,taglist}){
                             savePost(id,tempNote,tempTag);
                             setPostNote(tempNote);
                             setPostTag(tempTag);
-                            console.log(sPostNote);
-                            console.log(sPostTag);
-                            console.log(tempNote);
-                            console.log(tempTag);
                             setIsEdit(0);
                         }}>
                         Save
@@ -78,8 +74,8 @@ function ShowPost({id,img,note,datemodified,taglist}){
                             }
                         }}>Cancel</button>
                     </div>
-                    
                 </div>
+                <button className='post-delete-btn' onClick={()=>deletePost(id)}>Delete</button>
             </div>
         </div>
     </div>
@@ -95,6 +91,23 @@ function savePost(id,note,tags){
             "Content-type": "application/json; charset=UTF-8"
         }
     });
+}
+
+function deletePost(id){
+    const confirmation = window.confirm("Are you sure you want to delete this post?");
+    if(confirmation){
+        //delete
+        fetch('/deletepost',{
+            method: 'POST',
+            body: JSON.stringify({"id":id}),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }).then(res=>res.json()).then(data=> {
+            window.alert(data);
+            window.location.href = "/";
+        });
+    }
 }
 
 function getDate(date){

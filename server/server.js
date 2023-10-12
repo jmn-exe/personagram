@@ -101,4 +101,22 @@ app.post('/update',(req,res)=>{
     })
 })
 
+app.post('/deletepost',(req,res)=>{
+    fs.readFile(filePath,(err,data)=>{
+        if(err) throw err;
+        let postData = JSON.parse(data);
+        let deletePost = postData.filter(p=>p.id === req.body.id)
+        let imgPath = deletePost[0].image.url;
+        postData = postData.filter(p=> p.id !== req.body.id);
+        fs.writeFile(filePath,JSON.stringify(postData),(err)=>{
+            if (err) throw err;
+            fs.unlink(__dirname+imgPath,(err)=>{
+                if (err) throw err;
+                console.log("File deleted!");
+                res.json("Post deleted!")
+            })
+        })
+    })
+})
+
 app.listen(5000,()=>{console.log("Server started on port 5000")})

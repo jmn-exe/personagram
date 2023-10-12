@@ -119,9 +119,25 @@ button:hover{
     transform: translateX(-150%);
     text-decoration: none;
     color:rgb(20, 20, 20);
+    transition: all 0.3s;
 }
 .post-back-btn:hover{
     cursor: pointer;
+    text-decoration: underline;
+}
+
+.post-delete-btn{
+    font-size: 16px;
+    position:absolute;
+    left: 90%;
+    transform: translateX(-100%);
+    text-decoration: none;
+    color:rgb(20, 20, 20);
+    transition:all 0.3s;
+}
+.post-delete-btn:hover{
+    background-color: red;
+    color:white;
 }
 .tags-select input{
     vertical-align: middle;
