@@ -27,9 +27,11 @@ function ShowPost(_a) {
     var initNote = note;
     var initTag = taglist;
     var _b = (0, react_2.useState)(initNote), sPostNote = _b[0], setPostNote = _b[1];
-    var _c = (0, react_2.useState)(initTag), sPostTag = _c[0], setPostTag = _c[1];
-    var _d = (0, react_2.useState)(0), isEdit = _d[0], setIsEdit = _d[1];
-    var _e = (0, react_2.useState)(datemodified), date = _e[0], setDate = _e[1];
+    var _c = (0, react_2.useState)(initNote), tempNote = _c[0], setTempNote = _c[1];
+    var _d = (0, react_2.useState)(initTag), tempTag = _d[0], setTempTag = _d[1];
+    var _e = (0, react_2.useState)(initTag), sPostTag = _e[0], setPostTag = _e[1];
+    var _f = (0, react_2.useState)(0), isEdit = _f[0], setIsEdit = _f[1];
+    var _g = (0, react_2.useState)(datemodified), date = _g[0], setDate = _g[1];
     console.log("tag:");
     console.log(sPostTag);
     return (react_1.default.createElement("div", { className: 'post-view' },
@@ -48,19 +50,25 @@ function ShowPost(_a) {
                     react_1.default.createElement("button", { className: 'post-edit-btn', onClick: function () { return setIsEdit(1); } }, "Edit")),
                 react_1.default.createElement("div", { className: 'desc-edit ' + (isEdit ? '' : 'pv') },
                     react_1.default.createElement("div", { className: 'tags-select' },
-                        react_1.default.createElement(TagSelector, { tags: sPostTag, func: setPostTag })),
-                    react_1.default.createElement("textarea", { className: 'post-desc', value: sPostNote, onChange: function (t) { return setPostNote(t.target.value); } }),
+                        react_1.default.createElement(TagSelector, { tags: tempTag, func: setTempTag })),
+                    react_1.default.createElement("textarea", { className: 'post-desc', value: tempNote, onChange: function (t) { return setTempNote(t.target.value); } }),
                     react_1.default.createElement("div", { className: 'edit-confirm' },
                         react_1.default.createElement("button", { className: 'save-edit', onClick: function () {
                                 setDate(Date.now());
-                                savePost(id, sPostNote, sPostTag);
+                                savePost(id, tempNote, tempTag);
+                                setPostNote(tempNote);
+                                setPostTag(tempTag);
+                                console.log(sPostNote);
+                                console.log(sPostTag);
+                                console.log(tempNote);
+                                console.log(tempTag);
                                 setIsEdit(0);
                             } }, "Save"),
                         react_1.default.createElement("button", { className: 'cancel-edit', onClick: function () {
                                 var confirmation = window.confirm("Discard changes?");
                                 if (confirmation) {
-                                    setPostNote(initNote);
-                                    setPostTag(initTag);
+                                    setTempNote(sPostNote);
+                                    setTempTag(sPostTag);
                                     setIsEdit(0);
                                 }
                             } }, "Cancel")))))));

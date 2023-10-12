@@ -17,6 +17,8 @@ function ShowPost({id,img,note,datemodified,taglist}){
     const initNote = note;
     const initTag = taglist;
     const [sPostNote,setPostNote] = useState(initNote);
+    const [tempNote,setTempNote] = useState(initNote);
+    const [tempTag,setTempTag] = useState(initTag);
     const [sPostTag,setPostTag] = useState(initTag);
     const [isEdit,setIsEdit] = useState(0);
     const [date,setDate] = useState(datemodified);
@@ -45,18 +47,24 @@ function ShowPost({id,img,note,datemodified,taglist}){
                 </div>
                 <div className={'desc-edit ' + (isEdit ? '':'pv')}>
                     <div className='tags-select'>
-                        <TagSelector tags={sPostTag} func={setPostTag}/>
+                        <TagSelector tags={tempTag} func={setTempTag}/>
                     </div>
                     <textarea className='post-desc' 
-                    value={sPostNote}
-                    onChange={(t)=> setPostNote(t.target.value)}
+                    value={tempNote}
+                    onChange={(t)=> setTempNote(t.target.value)}
                     ></textarea>
                     <div className='edit-confirm'>
                         <button 
                         className='save-edit' 
                         onClick={()=> {
                             setDate(Date.now());
-                            savePost(id,sPostNote,sPostTag);
+                            savePost(id,tempNote,tempTag);
+                            setPostNote(tempNote);
+                            setPostTag(tempTag);
+                            console.log(sPostNote);
+                            console.log(sPostTag);
+                            console.log(tempNote);
+                            console.log(tempTag);
                             setIsEdit(0);
                         }}>
                         Save
@@ -64,8 +72,8 @@ function ShowPost({id,img,note,datemodified,taglist}){
                         <button className='cancel-edit' onClick={()=>{
                             const confirmation = window.confirm("Discard changes?");
                             if(confirmation){
-                                setPostNote(initNote);
-                                setPostTag(initTag);
+                                setTempNote(sPostNote);
+                                setTempTag(sPostTag);
                                 setIsEdit(0);
                             }
                         }}>Cancel</button>
