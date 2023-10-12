@@ -17,62 +17,58 @@ var react_2 = require("react");
 var react_router_dom_1 = require("react-router-dom");
 var react_router_dom_2 = require("react-router-dom");
 require("../App.css");
-var data_json_1 = __importDefault(require("../data/data.json"));
 var postTags = [
     { tag: 'Diary', class: 't-diary' },
     { tag: 'Journal', class: 't-journal' },
     { tag: 'Fun', class: 't-fun' },
 ];
-//console.log(JSON.stringify(postData));
-//let {id} = useParams();
-//console.log(id);
-//console.log(typeof(id));
-function ShowPost(props) {
-    var post = data_json_1.default.find(function (p) { return p.id === props.id; });
-    var initNote = post.note;
-    var initTag = post.tag;
-    var _a = (0, react_2.useState)(initNote), sPostNote = _a[0], setPostNote = _a[1];
-    var _b = (0, react_2.useState)(initTag), sPostTag = _b[0], setPostTag = _b[1];
-    var _c = (0, react_2.useState)(0), isEdit = _c[0], setIsEdit = _c[1];
-    if (post != null) {
-        return (react_1.default.createElement("div", { className: 'post-view' },
-            react_1.default.createElement("div", { className: 'post-container' },
-                react_1.default.createElement("div", { className: 'post-box' },
-                    react_1.default.createElement(react_router_dom_1.Link, { to: '/' },
-                        react_1.default.createElement("div", { className: "post-back-btn" }, "\u2190 Back")),
-                    react_1.default.createElement("div", { className: 'img-view' },
-                        react_1.default.createElement("img", { src: post.image.url, alt: post.image.alt })),
-                    react_1.default.createElement("div", { className: 'desc-view ' + (isEdit ? 'pv' : '') },
-                        react_1.default.createElement("div", { className: 'post-date' },
-                            "Last edited - ",
-                            getDate(post.datemodified)),
-                        react_1.default.createElement("div", { className: 'post-tags' }, post.tag.map(function (t) { return (react_1.default.createElement(Tag, { tag: t })); })),
-                        react_1.default.createElement("div", { className: 'post-desc' }, post.note),
-                        react_1.default.createElement("button", { className: 'post-edit-btn', onClick: function () { return setIsEdit(1); } }, "Edit")),
-                    react_1.default.createElement("div", { className: 'desc-edit ' + (isEdit ? '' : 'pv') },
-                        react_1.default.createElement("div", { className: 'tags-select' },
-                            react_1.default.createElement(TagSelector, { tags: sPostTag, func: setPostTag })),
-                        react_1.default.createElement("textarea", { className: 'post-desc', value: sPostNote, onChange: function (t) { return setPostNote(t.target.value); } }),
-                        react_1.default.createElement("div", { className: 'edit-confirm' },
-                            react_1.default.createElement("button", { className: 'save-edit', onClick: function () {
-                                    savePost(post.id, sPostNote, sPostTag);
+function ShowPost(_a) {
+    var id = _a.id, img = _a.img, note = _a.note, datemodified = _a.datemodified, taglist = _a.taglist;
+    var initNote = note;
+    var initTag = taglist;
+    var _b = (0, react_2.useState)(initNote), sPostNote = _b[0], setPostNote = _b[1];
+    var _c = (0, react_2.useState)(initTag), sPostTag = _c[0], setPostTag = _c[1];
+    var _d = (0, react_2.useState)(0), isEdit = _d[0], setIsEdit = _d[1];
+    console.log("tag:");
+    console.log(sPostTag);
+    return (react_1.default.createElement("div", { className: 'post-view' },
+        react_1.default.createElement("div", { className: 'post-container' },
+            react_1.default.createElement("div", { className: 'post-box' },
+                react_1.default.createElement(react_router_dom_1.Link, { to: '/' },
+                    react_1.default.createElement("div", { className: "post-back-btn" }, "\u2190 Back")),
+                react_1.default.createElement("div", { className: 'img-view' },
+                    react_1.default.createElement("img", { src: img.url, alt: img.alt })),
+                react_1.default.createElement("div", { className: 'desc-view ' + (isEdit ? 'pv' : '') },
+                    react_1.default.createElement("div", { className: 'post-date' },
+                        "Last edited - ",
+                        getDate(datemodified)),
+                    react_1.default.createElement("div", { className: 'post-tags' }, sPostTag.map(function (t) { return (react_1.default.createElement(Tag, { tag: t })); })),
+                    react_1.default.createElement("div", { className: 'post-desc' }, sPostNote),
+                    react_1.default.createElement("button", { className: 'post-edit-btn', onClick: function () { return setIsEdit(1); } }, "Edit")),
+                react_1.default.createElement("div", { className: 'desc-edit ' + (isEdit ? '' : 'pv') },
+                    react_1.default.createElement("div", { className: 'tags-select' },
+                        react_1.default.createElement(TagSelector, { tags: sPostTag, func: setPostTag })),
+                    react_1.default.createElement("textarea", { className: 'post-desc', value: sPostNote, onChange: function (t) { return setPostNote(t.target.value); } }),
+                    react_1.default.createElement("div", { className: 'edit-confirm' },
+                        react_1.default.createElement("button", { className: 'save-edit', onClick: function () {
+                                savePost(id, sPostNote, sPostTag);
+                                setIsEdit(0);
+                            } }, "Save"),
+                        react_1.default.createElement("button", { className: 'cancel-edit', onClick: function () {
+                                var confirmation = window.confirm("Discard changes?");
+                                if (confirmation) {
+                                    setPostNote(initNote);
+                                    setPostTag(initTag);
                                     setIsEdit(0);
-                                } }, "Save"),
-                            react_1.default.createElement("button", { className: 'cancel-edit', onClick: function () {
-                                    var confirmation = window.confirm("Discard changes?");
-                                    if (confirmation) {
-                                        setPostNote(initNote);
-                                        setPostTag(initTag);
-                                        setIsEdit(0);
-                                    }
-                                } }, "Cancel")))))));
-    }
+                                }
+                            } }, "Cancel")))))));
 }
 function savePost(id, note, tags) {
-    var postIndex = data_json_1.default.findIndex(function (p) { return p.id === id; });
-    data_json_1.default[postIndex].note = note;
-    data_json_1.default[postIndex].tag = tags;
-    data_json_1.default[postIndex].datemodified = JSON.stringify(Date.now());
+    /*
+    let postIndex = postData.findIndex(p => p.id === id)
+    postData[postIndex].note = note;
+    postData[postIndex].tag = tags;
+    postData[postIndex].datemodified = JSON.stringify(Date.now());*/
 }
 function getDate(date) {
     if (typeof (date) == "string") {
@@ -90,10 +86,12 @@ function Tag(props) {
     return (react_1.default.createElement("div", { key: tagName, className: tagClass }, tagName));
 }
 function TagSelector(props) {
+    console.log(props.tags);
+    console.log(props.tags.includes('Diary'));
     var tagList = postTags.map(function (t) {
         return (react_1.default.createElement("label", { key: t.tag, className: t.class + " .tag-select" },
             t.tag,
-            react_1.default.createElement("input", { key: t.tag, type: 'checkbox', id: t.tag, name: t.tag, value: t.tag, onChange: function (e) { return handleCheckbox(e, props.tags, props.func); }, defaultChecked: props.tags.includes(t.tag) ? true : false })));
+            react_1.default.createElement("input", { key: t.tag, type: 'checkbox', id: t.tag, name: t.tag, value: t.tag, onChange: function (e) { return handleCheckbox(e, props.tags, props.func); }, checked: props.tags.includes(t.tag) ? true : false })));
     });
     return (react_1.default.createElement(react_1.default.Fragment, null, tagList));
 }
@@ -106,7 +104,27 @@ function handleCheckbox(e, tags, setTags) {
     }
 }
 function PostView() {
+    var initPost = {
+        id: -1,
+        image: {
+            alt: '',
+            url: ''
+        },
+        note: '',
+        tag: [],
+        datemodified: ''
+    };
+    var _a = (0, react_2.useState)(initPost), sp = _a[0], setSelectedPost = _a[1];
     var id = (0, react_router_dom_2.useParams)().id;
-    return (react_1.default.createElement(ShowPost, { id: parseInt(id) }));
+    (0, react_2.useEffect)(function () {
+        fetch('/post/' + id).then(function (res) { return res.json(); }).then(function (data) {
+            setSelectedPost(data);
+        });
+    }, []);
+    console.log(sp);
+    return (react_1.default.createElement(react_1.default.Fragment, null, (sp.id === -1) ?
+        (react_1.default.createElement("p", null, "Loading..."))
+        :
+            (react_1.default.createElement(ShowPost, { id: sp.id, img: sp.image, datemodified: sp.datemodified, note: sp.note, taglist: sp.tag }))));
 }
 exports.default = PostView;

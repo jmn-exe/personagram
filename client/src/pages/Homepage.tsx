@@ -1,7 +1,8 @@
 import React from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import '../App.css'
-import postData from '../data/data.json'
+//import postData from '../data/data.json'
 
 function Post(props){
     return(
@@ -13,18 +14,15 @@ function Post(props){
     )
 }
 
-function ShowMain(){
-    return(
-      <div className="grid-center"> 
-        <div className="grid-container">
-          {postData.map((data)=> <Post postID={data.id} url={data.image.url}
-          alt={data.image.alt}/>)}
-        </div>
-      </div>
-    );
-}
-
 export default function Homepage(){
+  let [postData,setPostData] = useState([]);
+  useEffect(()=>{
+    fetch('/postdata').then(
+      res=> res.json()
+      ).then(data=>{
+        setPostData(data);
+      })
+  },[]);
     return(
     <div className="grid-center">
         <div className="grid-container">

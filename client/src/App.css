@@ -74,6 +74,9 @@ button:hover{
     align-items: center;
     height: 100vh;
     width: 100vw;
+    position: absolute;
+    top:0;
+    left:0;
 }
 
 .img-view, .img-view img{
@@ -85,6 +88,14 @@ button:hover{
 }
 
 .post-box{
+    width: 80vw;
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(235, 235, 235);
+    border: 1px solid rgb(219, 219, 219);
+}
+
+.post-upload{
     width: 80vw;
     display: flex;
     flex-direction: row;
@@ -182,4 +193,36 @@ button{
 }
 .t-fun{
     background-color: rgb(61, 42, 165);
+}
+
+.img-upload{
+    width:500px;
+    height:500px;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.img-upload img{
+    width: 500px;
+    height:500px;
+    object-fit: cover;
+}
+.img-upload input{
+    position: absolute;
+    z-index: 99;
+    transform: translateY(-600%);
+    background-color: rgba(255, 255, 255, 0.452);
+    padding: 5px;
+    border: 1px solid rgb(0, 0, 0,0.45);
+}
+.img-view-hide{
+    visibility: hidden;
+}
+.upload-form{
+    padding:20px;
+    width: 100%;
+}
+.upload-tags{
+    padding:10px 0px;
 }
