@@ -87,11 +87,6 @@ function savePost(id,note,tags){
             "Content-type": "application/json; charset=UTF-8"
         }
     });
-    /*
-    let postIndex = postData.findIndex(p => p.id === id)
-    postData[postIndex].note = note;
-    postData[postIndex].tag = tags;
-    postData[postIndex].datemodified = JSON.stringify(Date.now());*/
 }
 
 function getDate(date){
