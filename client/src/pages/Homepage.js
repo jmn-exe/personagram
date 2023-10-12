@@ -41,20 +41,29 @@ function Homepage() {
         tag: [],
         datemodified: ''
     };
-    var _a = (0, react_2.useState)([initPost]), postData = _a[0], setPostData = _a[1];
+    var _a = (0, react_2.useState)(true), isEmpty = _a[0], setIsEmpty = _a[1];
+    var _b = (0, react_2.useState)([initPost]), postData = _b[0], setPostData = _b[1];
     (0, react_2.useEffect)(function () {
         fetch('/postdata').then(function (res) { return res.json(); }).then(function (data) {
-            setPostData(data);
+            if (data.length === 0) {
+                setIsEmpty(false);
+            }
+            else {
+                setPostData(data);
+            }
         });
     }, []);
     return (react_1.default.createElement(react_1.default.Fragment, null,
         react_1.default.createElement("div", { className: 'sort-filter' },
             react_1.default.createElement("button", { onClick: function () { return sortLatest(postData, setPostData); } }, "Sort by Latest Added"),
             react_1.default.createElement("button", { onClick: function () { return sortLatestModified(postData, setPostData); } }, "Sort by Latest Modified")),
-        react_1.default.createElement("div", { className: "grid-center" }, (postData[0].id === -1) ? (react_1.default.createElement("p", null, "Loading...")) :
-            (react_1.default.createElement(react_1.default.Fragment, null,
+        react_1.default.createElement("div", { className: "grid-center" }, (postData[0].id === -1 && isEmpty) ? (react_1.default.createElement("p", null, "Loading...")) :
+            ((!isEmpty) ? (react_1.default.createElement("div", { className: "grid-container" },
+                react_1.default.createElement("p", null, "Your gallery is empty"),
+                react_1.default.createElement(react_router_dom_1.Link, { to: '/upload' },
+                    react_1.default.createElement("button", { className: 'upload-btn' }, "Upload")))) : (react_1.default.createElement(react_1.default.Fragment, null,
                 react_1.default.createElement("div", { className: "grid-container" }, postData.map(function (data) { return react_1.default.createElement(Post, { postID: data.id, url: data.image.url, alt: data.image.alt, key: data.id }); })),
                 react_1.default.createElement(react_router_dom_1.Link, { to: '/upload' },
-                    react_1.default.createElement("button", { className: 'upload-btn' }, "Upload")))))));
+                    react_1.default.createElement("button", { className: 'upload-btn' }, "Upload"))))))));
 }
 exports.default = Homepage;

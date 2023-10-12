@@ -40,11 +40,13 @@ app.post('/uploadpost', upload.single('image'), (req, res) =>{
     fs.readFile(filePath,(err,data)=>{
         if (err) throw err;
         let postData = JSON.parse(data);
-        console.log(postData);
-        let lastPost = postData.slice(-1)
-        let latestID = lastPost[0].id + 1;
-        console.log(postData);
-        console.log(latestID);
+        let latestID;
+        if(postData.length === 0){
+            latestID = 1;
+        }else{
+            let lastPost = postData.slice(-1);
+            latestID = lastPost[0].id + 1;
+        }
         let tempData = {
             id: latestID,
             note: req.body.notes,

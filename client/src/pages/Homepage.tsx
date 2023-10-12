@@ -45,13 +45,18 @@ export default function Homepage(){
     note:'',
     tag:[],
     datemodified:''
-}
-  let [postData,setPostData] = useState([initPost]);
+  }
+  const [isEmpty,setIsEmpty] = useState(true);
+  const [postData,setPostData] = useState([initPost]);
   useEffect(()=>{
     fetch('/postdata').then(
       res=> res.json()
       ).then(data=>{
-        setPostData(data);
+        if(data.length === 0){
+          setIsEmpty(false);
+        }else{
+          setPostData(data);
+        }
       })
   },[]);
     return(
@@ -61,16 +66,21 @@ export default function Homepage(){
       <button onClick={()=>sortLatestModified(postData,setPostData)}>Sort by Latest Modified</button>
     </div>
     <div className="grid-center">
-      {(postData[0].id === -1)? (<p>Loading...</p>) :
-      (
-        <>
+      {(postData[0].id === -1 && isEmpty) ? (<p>Loading...</p>) :
+      ((!isEmpty)?(
+        <div className="grid-container">
+          <p>Your gallery is empty</p>
+          <Link to='/upload'><button className='upload-btn'>Upload</button></Link>
+        </div>
+      ) : (
+      <>
         <div className="grid-container">
         {postData.map((data)=> <Post postID={data.id} url={data.image.url}
         alt={data.image.alt}
         key={data.id}/>)}
         </div>
         <Link to='/upload'><button className='upload-btn'>Upload</button></Link>
-        </>
+        </>)
       )
       }
     </div>
